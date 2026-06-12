@@ -42,15 +42,17 @@ class UserModel {
 
   //Atualizar usuário existente
   static async update(id, { name, email, phone }) {
-    await db.query(
+    const [result] = await db.query(
       'UPDATE users SET name = ?, email = ?, phone = ? WHERE id = ?',
       [name, email, phone, id],
     );
+    return result.affectedRows;
   }
 
   //Deletar usuário
   static async delete(id) {
-    await db.query('DELETE FROM users WHERE id = ?', [id]);
+    const [result] = await db.query('DELETE FROM users WHERE id = ?', [id]);
+    return result.affectedRows;
   }
 }
 
