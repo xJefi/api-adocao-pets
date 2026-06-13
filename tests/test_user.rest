@@ -1,0 +1,41 @@
+@baseUrl =  http://localhost:3000
+@id_user = 1
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbmlzdHJhZG9yQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4MTM3NzIxOSwiZXhwIjoxNzgxMzgwODE5fQ.0RDHVyED5yseHMMY3wGy2dDNqkXbogcLyfMQpK568R8
+
+### Listar todos os usuários
+GET {{baseUrl}}/users
+Authorization: Bearer {{token}}
+
+### Buscar usuário por ID
+GET {{baseUrl}}/users/{{id_user}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+### Atualizar usuário
+PUT {{baseUrl}}/users/{{id_user}} 
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "João",
+    "email": "joao@gmail.com",
+    "phone": "549993231312"
+}
+
+### Atualizar usuário pra admin
+PUT {{baseUrl}}/users/{{id_user}} 
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "Administrador2",
+    "email": "administrador2@gmail.com",
+    "phone": "549993231311",
+    "role": "admin"
+}
+
+
+### Deletar um usuário
+DELETE {{baseUrl}}/users/{{id_user}}
+Authorization: Bearer {{token}}

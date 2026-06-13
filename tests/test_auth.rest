@@ -1,0 +1,42 @@
+@baseUrl =  http://localhost:3000
+
+### Cadastro
+POST {{baseUrl}}/auth/users
+Content-Type: application/json
+
+{
+    "name": "João",
+    "email": "joao@gmail.com",
+    "password": "123456",
+    "phone": "549993231312"
+}
+
+### Cadastro de admin
+POST {{baseUrl}}/auth/users
+Content-Type: application/json
+
+{
+  "name": "Administrador3",
+  "email": "administrador3@gmail.com",
+  "password": "111111",
+  "phone": "(54)99999-9999",
+  "role": "admin"
+}
+
+### Login
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+    "email": "joao@gmail.com",
+    "password": "123456"
+}
+
+### Login Admin
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "administrador@gmail.com",
+  "password": "111111"
+}
