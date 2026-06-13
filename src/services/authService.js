@@ -5,7 +5,7 @@ const UserModel = require('../models/userModel');
 class AuthService {
   // Método para registrar um novo usuário
   static async registerUser(user) {
-    const { email, password } = user;
+    const { email, password, role } = user;
 
     // Verifica se o e-mail já está cadastrado
     const existing = await UserModel.findByEmail(email);
@@ -16,10 +16,12 @@ class AuthService {
     // Criptografa a senha antes de salvar no banco
     const hashed = await bcrypt.hash(password, 10);
 
+    const finalRole = role || 'adopter';
+
     const newUser = {
       ...user,
       password: hashed,
-      role: 'adopter',
+      role: finalRole,
     };
 
     // Cria o novo usuário e retorna seu ID
