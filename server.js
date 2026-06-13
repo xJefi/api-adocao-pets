@@ -1,11 +1,7 @@
 require('dotenv').config();
-
-const express = require('express');
-const app = express();
+const app = require('./src/app');
 
 const PORT = process.env.PORT;
-
-app.use(express.json());
 
 app.listen(PORT, () => {
   // eslint-disable-next-line no-console
