@@ -1,0 +1,46 @@
+@baseUrl =  http://localhost:3000
+@id_pet = 1
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbmlzdHJhZG9yQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4MjA3MTEzNCwiZXhwIjoxNzgyMDc0NzM0fQ.biByY-NPSdTws5LcYbm1TelhvTYYiAiic2En7px7rkQ
+
+### Rota pública: Buscar pets disponíveis para adoção
+GET {{baseUrl}}/pets/available
+
+### Listar Todos os Pets
+GET {{baseUrl}}/pets
+Authorization: Bearer {{token}}
+
+### TESTE DE ERRO: Acesso sem Token
+GET {{baseUrl}}/pets
+
+### Buscar Pet por ID
+GET {{baseUrl}}/pets/{{id_pet}}
+Authorization: Bearer {{token}}
+
+### Cadastrar Pet
+POST {{baseUrl}}/pets
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Rex",
+  "age": 3,
+  "species": "dog",
+  "size": "medium"
+}
+
+### Atualizar Pet
+PUT {{baseUrl}}/pets/{{id_pet}}
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Rex Atualizado",
+  "age": 4,
+  "species": "dog",
+  "size": "large"
+}
+
+### Deletar Pet
+DELETE {{baseUrl}}/pets/{{id_pet}}
+Authorization: Bearer {{token}}
