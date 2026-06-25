@@ -4,6 +4,7 @@ const helmet = require('helmet');
 const authRoutes = require('./routes/authRoutes');
 const userRoutes = require('./routes/userRoutes');
 const petRoutes = require('./routes/petRoutes');
+const adoptionRoutes = require('./routes/adoptionRoutes');
 
 const app = express();
 
@@ -16,5 +17,6 @@ app.use(express.json());
 app.use('/auth', authRoutes);
 app.use('/users', userRoutes);
 app.use('/pets', petRoutes);
+app.use('/adoptions', adoptionRoutes);
 
 module.exports = app;
