@@ -50,6 +50,15 @@ class PetModel {
     const [result] = await db.query('DELETE FROM pets WHERE id = ?', [id]);
     return result.affectedRows;
   }
+
+  //Método para alterar o status após ser realizada uma adoção
+  static async updateStatus(id, status) {
+    const [result] = await db.query('UPDATE pets SET status = ? WHERE id = ?', [
+      status,
+      id,
+    ]);
+    return result.affectedRows;
+  }
 }
 
 module.exports = PetModel;
