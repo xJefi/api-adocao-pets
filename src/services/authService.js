@@ -13,6 +13,12 @@ class AuthService {
       throw new Error('Usuário já existe');
     }
 
+    const allowedRoles = ['adopter', 'admin'];
+
+    if (role && !allowedRoles.includes(role)) {
+      throw new Error('Role inválida');
+    }
+
     // Criptografa a senha antes de salvar no banco
     const hashed = await bcrypt.hash(password, 10);
 
