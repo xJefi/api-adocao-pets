@@ -125,12 +125,11 @@ DB_PASSWORD=
 DB_DATABASE=pets_db
 PORT=3000
 JWT_SECRET=SenhaSecreta
+```
 
 4. Criar banco
 
-Executar o arquivo no seu cliente MySQL (como Workbench ou DBeaver)
-
-- src/database/schema.sql
+Executar o arquivo **src/database/schema.sql** no seu cliente MySQL (como Workbench ou DBeaver).
 
 5. Rodar seed (opcional)
 
@@ -152,7 +151,7 @@ npm run dev
 npm run dev
 ```
 
-**Executar a validação do ESLint:**
+- **Executar a validação do ESLint:**
 
 ```bash
 npm run lint
@@ -213,5 +212,5 @@ O projeto inclui arquivos .rest para testes manuais:
 
 ## 📌 Observações
 - Arquitetura em camadas (Controller → Service → Model).
-- Projeto desenvolvido como avaliação para a disciplina de **Desenvolvimento de Serviços Web** da faculdade de Análise e Desenvolvimento de Sistemas do IFRS.
 - Foco em boas práticas de autenticação e autorização.
+- Projeto desenvolvido como avaliação para a disciplina de **Desenvolvimento de Serviços Web** da faculdade de Análise e Desenvolvimento de Sistemas do IFRS.
