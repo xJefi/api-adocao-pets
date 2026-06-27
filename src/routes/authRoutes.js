@@ -3,7 +3,6 @@ const AuthController = require('../controllers/authController');
 
 const router = express.Router();
 
-//router.get('/pets/available', ) FALTA IMPLEMENTAR
 router.post('/users', AuthController.register);
 router.post('/login', AuthController.login);
 
