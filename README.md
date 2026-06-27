@@ -31,9 +31,9 @@ O projeto foi desenvolvido seguindo uma arquitetura em camadas para garantir a s
 ├── /tests             # Arquivos de testes (REST Client / Postman / Insomnia)
 ├── eslint.config.mjs  # Configuração de linting do código
 ├── .prettierrc        # Configuração de formatação do código
-└── README.md          # Documentação do projeto
+├── README.md          # Documentação do projeto
 ├── app.js             # Configuração principal do Express (middlewares e rotas)
-├── server.js          # Inicializa o servidor e conecta na porta definida no .env
+└── server.js          # Inicializa o servidor e conecta na porta definida no .env
 ```
 
 ---
@@ -43,9 +43,9 @@ O projeto foi desenvolvido seguindo uma arquitetura em camadas para garantir a s
 A autenticação é feita via JWT.
 
 Login retorna um token
-O token deve ser enviado no header:
 
-Authorization: Bearer <token>
+O token deve ser enviado no header:
+`Authorization: Bearer <token>`
 
 ---
 
