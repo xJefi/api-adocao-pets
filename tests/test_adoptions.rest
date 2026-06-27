@@ -1,0 +1,19 @@
+@baseUrl = http://localhost:3000
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJqb2FvQGdtYWlsLmNvbSIsInJvbGUiOiJhZG9wdGVyIiwiaWF0IjoxNzgyNTExMzMxLCJleHAiOjE3ODI1MTQ5MzF9.pcKKZf8XR_LoOjLY8repDQEfzmo61SGFivrz3KBs6nc
+
+@tokenAdm = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJhZG1pbmlzdHJhZG9yM0BnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3ODI1MTE0MDAsImV4cCI6MTc4MjUxNTAwMH0.ijB0X_O-atTcviupFTBRrnGj9-iHpcdOLTWHrJcxSxo
+
+## Lista todas as adoções realizadas
+GET {{baseUrl}}/adoptions
+Authorization: Bearer {{tokenAdm}}
+
+###
+
+## Realiza a adoção de um pet
+POST {{baseUrl}}/adoptions
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "petId": 1
+}
