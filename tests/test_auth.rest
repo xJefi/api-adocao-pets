@@ -5,10 +5,10 @@ POST {{baseUrl}}/auth/users
 Content-Type: application/json
 
 {
-    "name": "João",
-    "email": "joao@gmail.com",
-    "password": "123456",
-    "phone": "549993231312"
+  "name": "João",
+  "email": "joao@gmail.com",
+  "password": "123456",
+  "phone": "549993231312"
 }
 
 ### Cadastro de admin
@@ -28,8 +28,8 @@ POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-    "email": "joao@gmail.com",
-    "password": "123456"
+  "email": "joao@gmail.com",
+  "password": "123456"
 }
 
 ### Login Admin
@@ -37,6 +37,17 @@ POST {{baseUrl}}/auth/login
 Content-Type: application/json
 
 {
-  "email": "administrador@gmail.com",
+  "email": "administrador3@gmail.com",
   "password": "111111"
+}
+
+###
+
+### TESTE DE ERRO - Login com senha errada
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "joao@gmail.com",
+  "password": "senhaerrada"
 }

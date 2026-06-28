@@ -1,7 +1,7 @@
 @baseUrl = http://localhost:3000
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJqb2FvQGdtYWlsLmNvbSIsInJvbGUiOiJhZG9wdGVyIiwiaWF0IjoxNzgyNTExMzMxLCJleHAiOjE3ODI1MTQ5MzF9.pcKKZf8XR_LoOjLY8repDQEfzmo61SGFivrz3KBs6nc
-
-@tokenAdm = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJhZG1pbmlzdHJhZG9yM0BnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3ODI1MTE0MDAsImV4cCI6MTc4MjUxNTAwMH0.ijB0X_O-atTcviupFTBRrnGj9-iHpcdOLTWHrJcxSxo
+@tokenAdopter = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJqb2FvQGdtYWlsLmNvbSIsInJvbGUiOiJhZG9wdGVyIiwiaWF0IjoxNzgyNjEzODgxLCJleHAiOjE3ODI2MTc0ODF9.E6FyoS25VlzGIsWcNgpp2anqlGjLCxKrPJdW5bQL8Lk
+@tokenAdopter2 = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJqb2FvQGdtYWlsLmNvbSIsInJvbGUiOiJhZG9wdGVyIiwiaWF0IjoxNzgyNjE0NDM3LCJleHAiOjE3ODI2MTgwMzd9.064PLgY7YhuCP3ZShoUyGJbwVbGLEJOD_wq2-6xgsew
+@tokenAdm = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJhZG1pbmlzdHJhZG9yM0BnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3ODI2MTM0ODUsImV4cCI6MTc4MjYxNzA4NX0.zmx4gdITS0lqqw5Zr0CaAg4gRF4cHUq92IG6Z5viQKo
 
 ## Lista todas as adoções realizadas
 GET {{baseUrl}}/adoptions
@@ -9,11 +9,81 @@ Authorization: Bearer {{tokenAdm}}
 
 ###
 
+### TESTE DE ERRO - Adotante comum tenta ver histórico de adoções realizadas
+GET {{baseUrl}}/adoptions
+Authorization: Bearer {{tokenAdopter}}
+
+###
+
 ## Realiza a adoção de um pet
 POST {{baseUrl}}/adoptions
-Authorization: Bearer {{token}}
+Authorization: Bearer {{tokenAdopter}}
 Content-Type: application/json
 
 {
   "petId": 1
+}
+
+###
+
+## TESTE DE ERRO - Outro adotante tenta realizar a adoção de um pet já adotado
+POST {{baseUrl}}/adoptions
+Authorization: Bearer {{tokenAdopter}}
+Content-Type: application/json
+
+{
+  "petId": 1
+}
+
+###
+
+## TESTE DE ERRO - Administrador tenta realizar a adoção de um pet
+POST {{baseUrl}}/adoptions
+Authorization: Bearer {{tokenAdm}}
+Content-Type: application/json
+
+{
+  "petId": 3
+}
+
+###
+
+## TESTE DE ERRO - Tentando adotar pet inexistente
+POST {{baseUrl}}/adoptions
+Authorization: Bearer {{tokenAdopter}}
+Content-Type: application/json
+
+{
+  "petId": 9999
+}
+
+###
+
+## TESTE DE ERRO - Sem enviar petId
+POST {{baseUrl}}/adoptions
+Authorization: Bearer {{tokenAdopter}}
+Content-Type: application/json
+
+{
+}
+
+###
+
+## TESTE DE ERRO - Tentando adotar sem token
+POST {{baseUrl}}/adoptions
+Content-Type: application/json
+
+{
+  "petId": 3
+}
+
+###
+
+## TESTE DE ERRO - Tentando adotar com um token vencido
+POST {{baseUrl}}/adoptions
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJqb2FvQGdtYWlsLmNvbSIsInJvbGUiOiJhZG9wdGVyIiwiaWF0IjoxNzgyNTExMzMxLCJleHAiOjE3ODI1MTQ5MzF9.pcKKZf8XR_LoOjLY8repDQEfzmo61SGFivrz3KBs6nc
+Content-Type: application/json
+
+{
+  "petId": 3
 }

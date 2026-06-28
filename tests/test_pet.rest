@@ -1,26 +1,26 @@
 @baseUrl =  http://localhost:3000
 @id_pet = 1
-
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiZW1haWwiOiJhZG1pbmlzdHJhZG9yQGdtYWlsLmNvbSIsInJvbGUiOiJhZG1pbiIsImlhdCI6MTc4MjA3MTEzNCwiZXhwIjoxNzgyMDc0NzM0fQ.biByY-NPSdTws5LcYbm1TelhvTYYiAiic2En7px7rkQ
+@tokenAdopter = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NSwiZW1haWwiOiJqb2FvQGdtYWlsLmNvbSIsInJvbGUiOiJhZG9wdGVyIiwiaWF0IjoxNzgyNjEzODgxLCJleHAiOjE3ODI2MTc0ODF9.E6FyoS25VlzGIsWcNgpp2anqlGjLCxKrPJdW5bQL8Lk
+@tokenAdm = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MywiZW1haWwiOiJhZG1pbmlzdHJhZG9yM0BnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3ODI2MTM0ODUsImV4cCI6MTc4MjYxNzA4NX0.zmx4gdITS0lqqw5Zr0CaAg4gRF4cHUq92IG6Z5viQKo
 
 ### Rota pública: Buscar pets disponíveis para adoção
 GET {{baseUrl}}/pets/available
 
 ### Listar Todos os Pets
 GET {{baseUrl}}/pets
-Authorization: Bearer {{token}}
+Authorization: Bearer {{tokenAdm}}
 
 ### TESTE DE ERRO: Acesso sem Token
 GET {{baseUrl}}/pets
 
 ### Buscar Pet por ID
 GET {{baseUrl}}/pets/{{id_pet}}
-Authorization: Bearer {{token}}
+Authorization: Bearer {{tokenAdm}}
 
 ### Cadastrar Pet
 POST {{baseUrl}}/pets
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer {{tokenAdm}}
 
 {
   "name": "Rex",
@@ -32,7 +32,50 @@ Authorization: Bearer {{token}}
 ### Atualizar Pet
 PUT {{baseUrl}}/pets/{{id_pet}}
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer {{tokenAdm}}
+
+{
+  "name": "Rex Atualizado",
+  "age": 4,
+  "species": "dog",
+  "size": "large",
+  "description": "Atualização de descrição para teste."
+}
+
+### Deletar Pet
+DELETE {{baseUrl}}/pets/{{id_pet}}
+Authorization: Bearer {{tokenAdm}}
+
+###
+
+### TESTE DE ERRO - Tentando deletar um pet já adotado
+DELETE {{baseUrl}}/pets/1
+Authorization: Bearer {{tokenAdm}}
+
+### TESTE DE ERRO - Tentando listar pets como user comum
+GET {{baseUrl}}/pets
+Authorization: Bearer {{tokenAdopter}}
+
+### TESTE DE ERRO - Buscar Pet por ID como user comum
+GET {{baseUrl}}/pets/{{id_pet}}
+Authorization: Bearer {{tokenAdopter}}
+
+### TESTE DE ERRO - Cadastrar Pet como user comum
+POST {{baseUrl}}/pets
+Content-Type: application/json
+Authorization: Bearer {{tokenAdopter}}
+
+{
+  "name": "Rex",
+  "age": 3,
+  "species": "dog",
+  "size": "medium"
+}
+
+### TESTE DE ERRO - Atualizar Pet como user comum
+PUT {{baseUrl}}/pets/{{id_pet}}
+Content-Type: application/json
+Authorization: Bearer {{tokenAdopter}}
 
 {
   "name": "Rex Atualizado",
@@ -41,6 +84,33 @@ Authorization: Bearer {{token}}
   "size": "large"
 }
 
-### Deletar Pet
+### TESTE DE ERRO - Deletar Pet como user comum
 DELETE {{baseUrl}}/pets/{{id_pet}}
-Authorization: Bearer {{token}}
+Authorization: Bearer {{tokenAdopter}}
+
+###
+
+### TESTE DE ERRO - Listar pet inexistente
+GET {{baseUrl}}/pets/9999
+Authorization: Bearer {{tokenAdm}}
+
+### TESTE DE ERRO - Atualizar Pet inexistente
+PUT {{baseUrl}}/pets/9999
+Content-Type: application/json
+Authorization: Bearer {{tokenAdm}}
+
+### TESTE DE ERRO - Deletar Pet inexistente
+DELETE {{baseUrl}}/pets/9999
+Authorization: Bearer {{tokenAdm}}
+
+### TESTE DE ERRO - Cadastrar Pet com dados inválidos
+POST {{baseUrl}}/pets
+Content-Type: application/json
+Authorization: Bearer {{tokenAdm}}
+
+{
+  "name": "",
+  "age": 3,
+  "species": "dog",
+  "size": "medium"
+}
