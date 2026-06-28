@@ -99,6 +99,13 @@ PUT {{baseUrl}}/pets/9999
 Content-Type: application/json
 Authorization: Bearer {{tokenAdm}}
 
+{
+  "name": "Rex Atualizado",
+  "age": 4,
+  "species": "dog",
+  "size": "medium"
+}
+
 ### TESTE DE ERRO - Deletar Pet inexistente
 DELETE {{baseUrl}}/pets/9999
 Authorization: Bearer {{tokenAdm}}
