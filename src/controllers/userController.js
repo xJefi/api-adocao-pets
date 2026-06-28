@@ -29,6 +29,14 @@ class UserController {
   static async update(req, res) {
     try {
       const id = req.params.id; // Pega o ID da URL
+      const { name, email, phone } = req.body;
+
+      if (!name || !email || !phone) {
+        return res.status(400).json({
+          error: 'Todos os campos (name, email, phone) são obrigatórios',
+        });
+      }
+
       await UserService.updateUser(id, req.body);
       return res.status(200).json({
         message: 'Usuário atualizado com sucesso.',

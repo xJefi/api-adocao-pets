@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 const PetService = require('../services/petService');
 
 class PetController {
@@ -35,6 +36,14 @@ class PetController {
   //Método para criar um pet
   static async createPet(req, res) {
     try {
+      const { name, age, species, size } = req.body;
+
+      if (!name || !age || !species || !size) {
+        return res.status(400).json({
+          error: 'name, age, species e size são campos obrigatórios',
+        });
+      }
+
       const pet = await PetService.createPet(req.body, req.user);
       res.status(201).json({ message: 'Pet criado com sucesso.', pet });
     } catch (error) {
@@ -46,6 +55,14 @@ class PetController {
   static async updatePet(req, res) {
     try {
       const id = req.params.id;
+      const { name, age, species, size } = req.body;
+
+      if (!name || !age || !species || !size) {
+        return res.status(400).json({
+          error: 'Campos obrigatórios: name, age, species, size',
+        });
+      }
+
       await PetService.updatePet(id, req.body, req.user);
       res.json({ message: 'Pet atualizado com sucesso.' });
     } catch (error) {

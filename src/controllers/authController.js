@@ -4,6 +4,15 @@ class AuthController {
   // Registrar usuário
   static async register(req, res) {
     try {
+      const { name, email, password, phone } = req.body;
+
+      if (!name || !email || !password || !phone) {
+        return res.status(400).json({
+          error:
+            'Todos os campos (name, email, password, phone) são obrigatórios',
+        });
+      }
+
       const result = await AuthService.registerUser(req.body);
 
       return res.status(201).json({ result });
